@@ -1,0 +1,1 @@
+export { default } from "file:///Users/it-dept/Documents/Work/perpus-web/fe/node_modules/@nuxt/vite-builder/dist/runtime/client.manifest.mjs"

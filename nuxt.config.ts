@@ -3,13 +3,13 @@ import path from 'path'
 
 export default defineNuxtConfig({
   devtools: { enabled: true },
-  modules: ['nuxt-icon', 'nuxt-primevue', '@pinia/nuxt', ['@vee-validate/nuxt', {
+  modules: ['nuxt-icon', 'nuxt-primevue', '@pinia/nuxt', '@nuxtjs/color-mode', '@nuxtjs/tailwindcss', ['@vee-validate/nuxt', {
     autoImports: true,
     componentNames: {
-      Form: 'VeeForm',
-      Field: 'VeeField',
-      FieldArray: 'VeeFieldArray',
-      ErrorMessage: 'VeeErrorMessage',
+      Form: 'Form',
+      Field: 'Field',
+      FieldArray: 'FieldArray',
+      ErrorMessage: 'ErrorMessage',
     },
   }]],
   app: {
@@ -28,12 +28,11 @@ export default defineNuxtConfig({
         {
           rel: "stylesheet", href: "https://fonts.cdnfonts.com/css/futura-std-4"
         }
-
       ],
     }
   },
   // buildModules: ['@nuxtjs/tailwindcss'],
-  css: ['~/assets/css/main.css', 'primevue/resources/themes/aura-light-indigo/theme.css'],
+  css: ['~/assets/css/main.css'],
   runtimeConfig: {
     public: {
       baseURL: process.env.BASE_URL || 'http://127.0.0.1:8080/api/',
@@ -43,11 +42,16 @@ export default defineNuxtConfig({
   },
   primevue: {
     /* Options */
-    // usePrimeVue: true,
+
+    // if you want to make unstyled mode change option to true and uncomment importPt
     options: {
-      unstyled: true,
+      unstyled: true
     },
-    importPT: { from: path.resolve(__dirname, './presets/lara/') }
+    importPT: { from: path.resolve(__dirname, './presets/wind/') },
+
+    components: {
+      include: '*'
+    }
   },
   postcss: {
     plugins: {
@@ -56,8 +60,17 @@ export default defineNuxtConfig({
     },
   },
   plugins: ['~/plugins/axios.ts', '~/plugins/toast.ts'],
+  tailwindcss: {
+    cssPath: '~/assets/css/main.css',
+    configPath: 'tailwind.config.ts'
+  },
   pinia: {
     storesDirs: ['./stores/**', './custom-folder/stores/**'],
+  },
+  routeRules: {
+    '/api/**': {
+      proxy: { to: process.env.API_BASE_URL }
+    }
   },
   // $env: {
   //   baseURL: process.env.BASE_URL || 'http://127.0.0.1:8080/api/',

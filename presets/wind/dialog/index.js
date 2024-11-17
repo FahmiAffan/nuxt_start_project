@@ -41,8 +41,8 @@ export default {
             'p-6 pt-4',
 
             // Shape
-            'rounded-tl-lg',
-            'rounded-tr-lg',
+            'rounded-tl-2xl',
+            'rounded-tr-2xl',
 
             // Colors
             'bg-surface-0 dark:bg-surface-800',
@@ -153,8 +153,8 @@ export default {
             // Shape
             {
                 grow: state.maximized,
-                'rounded-bl-lg': !instance.$slots.footer,
-                'rounded-br-lg': !instance.$slots.footer
+                'rounded-bl-2xl': !instance.$slots.footer,
+                'rounded-br-2xl': !instance.$slots.footer
             },
 
             // Colors

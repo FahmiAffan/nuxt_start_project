@@ -36,6 +36,7 @@ module.exports = {
                 'surface-950': 'rgb(var(--surface-950))'
             }
         },
+        darkMode: 'class'
     },
     plugins: [],
     compilerOptions: {

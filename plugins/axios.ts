@@ -10,13 +10,13 @@ export default defineNuxtPlugin(nuxtApp => {
         headers: {
             'Content-Type': 'application/json',
         },
-        withCredentials: true,
+        withCredentials: false,
         withXSRFToken: true,
     });
     axiosConfig.interceptors.request.use(function (response) {
         let token = useCookie('token');
         if (token) {
-            response.headers['Authorization'] = `Bearer ${token}`
+            response.headers['Authorization'] = `Bearer ${token.value}`
         }
         return response;
     }, function (error) {
@@ -24,14 +24,13 @@ export default defineNuxtPlugin(nuxtApp => {
     });
 
     axiosConfig.interceptors.response.use(function (response) {
-        if (response) {
-            useNuxtApp().$toast.add({ severity: "success", summary: 'Success', detail: response.data.msg, life: 3000 })
-            console.log(response)
+        if (response.status == 201) {
+            useNuxtApp().$toast.add({ severity: "success", summary: 'Success', detail: response.data.message, life: 3000 })
         }
         return response;
     }, function (error) {
         if (error) {
-
+            useNuxtApp().$toast.add({ severity: "error", summary: 'Error', detail: error.response.data.error, life: 3000 })
         }
         // return error
         return Promise.reject(error);

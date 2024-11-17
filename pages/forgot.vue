@@ -53,6 +53,10 @@ let form = reactive({
   email: "",
 });
 
+definePageMeta({
+  layout: false,
+});
+
 function Submit() {
   console.log("walawe");
 }
